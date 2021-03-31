@@ -19,7 +19,7 @@
 おかずに困った時にユーザーの投稿からヒントを得られる
 
 ## 設計書
-<...>
+https://docs.google.com/spreadsheets/d/1k72TUoyH19BIZ4_qoer5g0XFJW-CTi2JW_RAuB49qYo/edit#gid=2112601640
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1lGwdW988mwKikb-Z3pJxKDU75b410udLzrnD_yyHzLI/edit#gid=0
