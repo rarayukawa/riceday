@@ -18,6 +18,12 @@
 ### 主な利用シーン
 おかずに困った時にユーザーの投稿からヒントを得られる
 
+## 設計書
+<...>
+
+## チャレンジ要素一覧
+https://docs.google.com/spreadsheets/d/1lGwdW988mwKikb-Z3pJxKDU75b410udLzrnD_yyHzLI/edit#gid=0
+
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
