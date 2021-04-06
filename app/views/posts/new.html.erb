@@ -2,6 +2,7 @@
   <div class="col-8">新規投稿
   <%= form_with model: @post, url:'/posts', local:true do |f| %>
   <div class="form_image">画像</div>
+  <%= attachment_image_tag @post, :post_image, fallback: "noimage.jpeg", id: "img_prev", style: "height: 250px; width:300px;" %><br>
   <%= f.attachment_field :post_image %>
   <div class="form_title">タイトル</div>
   <%= f.text_field :title %>
@@ -11,3 +12,22 @@
   <% end %>
   </div>
 </div>
+
+
+
+<script>
+$(document).on("turbolinks:load", function(){
+  function readURL(input) {
+    if(input.files && input.files[0]){
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#img_prev').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#post_post_image").change(function(){
+    readURL(this);
+  });
+});
+</script>

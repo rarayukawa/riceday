@@ -8,11 +8,19 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @user = current_user
     @post.user_id = current_user.id
     if @post.save
+      PostCategory.maltilevel_category_create(
+      @post,
+      params[:parent_id],
+      params[:children_id],
+      params[:grandchildren_id]
+    )
       redirect_to post_path(@post), notice: "投稿しました！"
     else
       @posts = Post.all
+      @category_parent_array = Category.category_parent_array_create
       render 'index'
     end
   end
@@ -28,6 +36,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @post = Post.new
+    @category_parent_array = Category.category_parent_array_create
   end
 
   def edit
@@ -53,8 +62,17 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def get_category_children
+    @category_children = Category.find(params[:parent_id]).children
+  end
+
+  def get_category_grandchildren
+    @category_grandchildren = Category.find(params[:children_id]).children
+  end
+
+
   private
   def post_params
-    params.require(:post).permit(:title, :text)
+    params.require(:post).permit(:title, :text, :post_image, { category_ids: [] })
   end
 end
