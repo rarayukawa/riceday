@@ -9,9 +9,9 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to category_path
+      redirect_to categories_path
     else
-      @categories = Category.all
+      # @categories = Category.alls
       render 'index'
     end
   end
