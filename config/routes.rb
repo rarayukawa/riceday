@@ -13,8 +13,12 @@ Rails.application.routes.draw do
   delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
 
   resources :users do
-    resource :relationships, only: [:crete, :destroy]
+    member do
+      get :following, :followers
+    end
   end
+  resources :relationships, only: [:crete, :destroy]
+  
 
   resources :posts do
     resources :post_comments, only: [:create, :destroy, :edit]

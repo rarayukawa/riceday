@@ -8,9 +8,10 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @user = current_user
+    # @user = current_user
     @post.user_id = current_user.id
     if @post.save
+      @posts = Post.order(created_at: :desc).limit(8)
       PostCategory.maltilevel_category_create(
       @post,
       params[:parent_id],
@@ -34,7 +35,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.order(created_at: :desc).limit(8)
     @post = Post.new
     @category_parent_array = Category.category_parent_array_create
   end

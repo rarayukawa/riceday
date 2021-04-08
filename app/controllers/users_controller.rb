@@ -33,14 +33,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def follower
+  def following
+    # @userがフォローしているユーザー
     @user = User.find(params[:id])
-    @users = @user.follower
+    @users = @user.following
   end
 
-  def followed
+  def followers
+    # @userをフォローしているユーザー
     @user = User.find(params[:id])
-    @users = @user.followed
+    @users = @user.followers
   end
 
 

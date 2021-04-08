@@ -1,0 +1,22 @@
+<% posts.each do |post| %>
+  <tr>
+    <td><%= link_to post do %>
+        <%= attachment_image_tag(post, :post_image, :fill, 190, 190, fallback: "noimage.jpeg") %>
+        <% end %></td>
+    <td><%= link_to post.user do %>
+        <%= attachment_image_tag(post.user, :profile_image, fallback: "noimage.jpeg", class:"profile-img-circle", size: "30x30") %>
+        <%= post.user.name %>
+        <% end %></td>
+    <td><%= link_to post.title, post_path(post), class: "post_#{post.id}" %></td>
+    <td><%= post.text %></td>
+    <td><% post.categories.each do |category| %>
+        <%= post.category.name %>
+        <% end %></td>
+    <td><div id="index_favorite_<%= post.id %>">
+          <%= render 'favorites/favorite', post: post %>
+        </div></td>
+    <td><% if post.user == current_user %>
+        <%= link_to '削除', post, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, remote: true, class: 'btn-sm btn-danger' %>
+        <% end %></td>
+  </tr>
+<% end %>

@@ -7,31 +7,34 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy #フォロー取得
-  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy #フォロワー取得
-  has_many :following_user, through: :follower, source: :followed #自分がフォローしている人
-  has_many :follower_user, through: :followed, source: :follower #自分をフォローしている人
-
+  has_many :following_relationships, foreign_key: "follower_id", class_name: "Relationship",  dependent: :destroy
+  has_many :following, through: :following_relationships
+  has_many :follower_relationships, foreign_key: "following_id", class_name: "Relationship", dependent: :destroy
+  has_many :followers, through: :follower_relationships
   attachment :profile_image, destroy: false
 
   validates :name, length: {maximum: 50, minimum: 1}
   # unipueness: true
 
-  def follow(user_id)
-   follower.create(followed_id: user_id)
-  end
+  #既にいいねしているかどうか
+ def already_favorited?(post)
+   self.favorites.exists?(post_id: post.id)
+ end
 
-  def unfollow(user_id)
-    follower.find_by(followed_id: user_id).destroy
-  end
-
+  #フォローしているかを確認
   def following?(user)
-    following_user.include?(user)
+    following_relationships.find_by(following_id: user.id)
   end
 
-
-  def favorited_by?(book_id)
-    favorites.where(book_id: book_id).exists?
+  #フォローする
+  def follow(user)
+    following_relationships.create!(following_id: user.id)
   end
+
+  #フォローを外す
+  def unfollow(user)
+    following_relationships.find_by(following_id: user.id).destroy
+  end
+
 
 end
