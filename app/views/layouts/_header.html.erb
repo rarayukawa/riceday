@@ -11,6 +11,7 @@
             <li><%= link_to "投稿一覧", posts_path %></li>
             <li><%= link_to "カテゴリ一覧", categories_path %></li>
             <li><%= link_to "マイページ", user_path(current_user) %></li>
+            <li><%= link_to "ユーザー一覧", users_path %></l>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           <% else %>
             <li><%= link_to "ABOUT", home_about_path %></li>

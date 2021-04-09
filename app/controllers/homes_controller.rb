@@ -10,4 +10,7 @@ class HomesController < ApplicationController
     @follower_users = current_user.follower_user
   end
 
+  def category_window
+    @children = Category.find(params[:parent_id]).children
+  end
 end

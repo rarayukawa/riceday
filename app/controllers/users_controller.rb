@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @users = Uswer.all
+    @users = User.all
     @post = Post.new
   end
 
@@ -15,6 +15,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts
     @post = Post.new
+    # @following_users = current_user.following_user
+    # @follower_users = current_user.follower_user
   end
 
   def edit

@@ -3,5 +3,28 @@
     サイドバー<br>
     <%= link_to "新規投稿", new_post_path %><br>
     <%= link_to "カテゴリ一覧", categories_path %><br>
+    <nav class="navbar.navbar-default.navbar-fixed-top">
+        <ul class="nav.navbar-nav.navbar-right">
+          <li class="dropdown" role='presentation'>
+            <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'></a>
+              <i class="fas.fa-list-ul"></i>
+              <span>
+                カテゴリーから探す
+              </span>
+              <span class="caret">
+                <ul class="dropdown-menu" role='menu'>
+                  <li role='presentation'>
+                　<% Category.where(ancestry: nil).each do |parent| %>
+                  <%= link_to parent.name, root_path, id: "#{parent.id}", class: 'parent-category' %>
+                  <% end %>
+                  </li><br>
+                  <li role='presentation' class='children-list'></li>
+                  <br>
+                  <li role='presentation' class='grandchildren-list'></li>
+                </ul>
+              </span>
+          </li>
+        </ul>
+      </nav>
   </div>
 </div>

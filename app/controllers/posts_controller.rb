@@ -46,13 +46,23 @@ class PostsController < ApplicationController
     if @user != current_user
       redirect_to posts_path
     end
+    @category_parent_array = Category.category_parent_array_create
   end
 
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
+      post_categories = PostCategory.where(post_id: @post.id)
+      post_categories.destroy_all
+      PostCategory.maltilevel_category_create(
+        @post,
+        params[:parent_id],
+        params[:children_id],
+        params[:grandchildren_id]
+       )
       redirect_to post_path(@post), notice: "変更しました！"
     else
+      @category_parent_array = Category.category_parent_array_create
       render "edit"
     end
   end

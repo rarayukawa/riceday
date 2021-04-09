@@ -2,17 +2,18 @@
   <div class="col-md-3">
     <%= form_with model: @post, remote: true do |f| %>
       <%= f.label :post_image, '画像' %><br>
-      <%= f.attachment_field :post_image, class: "form-control" %><br>
+      <%= attachment_image_tag @post, :post_image, fallback: "noimage.jpeg", id: "img_prev", style: "height: 200px; width:200px;" %><br>
+      <%= f.attachment_field :post_image, class: "form-control-file post_image" %><br>
       <%= f.label :title, 'タイトル' %><br>
       <%= f.text_field :title, class:'form-control' %><br>
       <%= f.label :text, '本文' %><br>
       <%= f.text_area :text, class:'form-control' %><br>
       <div class="category-form">
-        <%= label_tag 'ジャンル' %>
+        <%= label_tag 'カテゴリー' %>
         <%= select_tag 'parent_id', options_for_select(@category_parent_array), id: 'parent-category', class: 'form-control post-category' %>
         <i class="fas fa-chevron-down"></i>
       </div><br>
-      <%= collection_check_boxes(:book, :category_ids, Category.all, :id, :name) do |cb| %>
+      <%= collection_check_boxes(:post, :category_ids, Category.all, :id, :name) do |cb| %>
         <%= cb.label { cb.check_box + ' ' + cb.text } %>
       <% end %><br>
       <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
@@ -36,3 +37,21 @@
     </table>
   </div>
 </div>
+
+
+<script>
+$(document).on("turbolinks:load", function(){
+  function readURL(input) {
+    if(input.files && input.files[0]){
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#img_prev').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#post_post_image").change(function(){
+    readURL(this);
+  });
+});
+</script>

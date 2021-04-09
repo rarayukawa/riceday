@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'users/:user_id/followers' => 'relationships#followers', as: 'followers'
   post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
   delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
+  get 'get_category/new', to: 'homes#category_window', defaults: { format: 'json' }
 
   resources :users do
     member do
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships, only: [:crete, :destroy]
-  
+
 
   resources :posts do
     resources :post_comments, only: [:create, :destroy, :edit]
