@@ -15,8 +15,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts
     @post = Post.new
-    # @following_users = current_user.following_user
-    # @follower_users = current_user.follower_user
+    @following_users = current_user.following
+    @follower_users = current_user.followers
   end
 
   def edit
@@ -37,14 +37,16 @@ class UsersController < ApplicationController
 
   def following
     # @userがフォローしているユーザー
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @users = @user.following
+    render 'show_follow'
   end
 
   def followers
     # @userをフォローしているユーザー
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @users = @user.followers
+    render 'show_follower'
   end
 
 

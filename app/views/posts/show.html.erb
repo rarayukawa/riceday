@@ -29,11 +29,25 @@
           </div></td>
     </tr>
   </table>
+    <ul>
+        <li class="comment-create">
+            <h3 class="text-left title">コメント</h3>
+        </li>
+        <li id="comments_area">
+            <%= render partial: 'post_comments/index', locals: { post_comments: @post_comments } %>
+        </li>
+    </ul>
+    <hr>
+    <% if user_signed_in? %>
+        <div class="comment-create">
+            <h3 class="text-left">コメントを投稿する</h3>
+            <%= render partial: 'post_comments/form', locals: { post_comment: @post_comment, post: @post, newpost_comment: @newpost_comment } %>
+        </div>
+    <% end %>
   </div>
 </div>
-
-
-
 <div class='row'>
+  <div class="col-md-4">
   <%= link_to '投稿情報編集',edit_post_path(@post),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{@post.id}" %>
+  </div>
 </div>

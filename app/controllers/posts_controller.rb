@@ -31,11 +31,12 @@ class PostsController < ApplicationController
     @user = @post.user
     @newpost = Post.new
     @newpost_comment = PostComment.new
-    @post_comments = @post.post_comments
+    @post_comments = @post.post_comments.order(created_at: :desc)
+    # 新着順で表示
   end
 
   def index
-    @posts = Post.order(created_at: :desc).limit(8)
+    @posts = Post.order(created_at: :desc).page(params[:page]).per(5)
     @post = Post.new
     @category_parent_array = Category.category_parent_array_create
   end
