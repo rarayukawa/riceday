@@ -22,17 +22,17 @@ class User < ApplicationRecord
  end
 
   #フォローしているかを確認
-  def following?(user_id)
+  def following?(user)
     following_relationships.find_by(following_id: user.id)
   end
 
   #フォローする
-  def follow(user_id)
+  def follow(user)
     following_relationships.create!(following_id: user.id)
   end
 
   #フォローを外す
-  def unfollow(user_id)
+  def unfollow(user)
     following_relationships.find_by(following_id: user.id).destroy
   end
 

@@ -33,12 +33,14 @@ class PostsController < ApplicationController
     @newpost_comment = PostComment.new
     @post_comments = @post.post_comments.order(created_at: :desc)
     # 新着順で表示
+    @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
 
   def index
     @posts = Post.order(created_at: :desc).page(params[:page]).per(5)
     @post = Post.new
     @category_parent_array = Category.category_parent_array_create
+    @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
 
   def edit
@@ -80,6 +82,13 @@ class PostsController < ApplicationController
 
   def get_category_grandchildren
     @category_grandchildren = Category.find(params[:children_id]).children
+  end
+
+  def ensure_correct_user
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+     redirect_to root_path
+    end
   end
 
 

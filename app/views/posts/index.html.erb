@@ -18,8 +18,37 @@
       <% end %><br>
       <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
     <% end %>
+      <div class="rank">
+      <h3>投稿記事ランキング</h3>
+      <% lastFavorite = 0 %>
+        <% j = 1 %>
+        <% @all_ranks.each.with_index(1) do |ranking, i| %>
+          <% if i == 1 %>
+            <% lastFavorite = ranking.favorites.count %>
+          <% end %>
+          <% if ranking.favorites.count != lastFavorite %>
+            <% j = i %>
+            第<%= j %>位<br>
+            <%= link_to ranking.user do %>
+            <%= attachment_image_tag(ranking, :post_image, :fill, 200, 200, fallback: "noimage.jpeg") %><br>
+            <%= ranking.user.name %><br>
+          <% end %>
+            いいね数：<%= ranking.favorites.count %>
+            <% lastFavorite = ranking.favorites.count %>
+          <% else %>
+            <% lastFavorite = ranking.favorites.count %>
+            第<%= j %>位<br>
+            <%= link_to ranking.user do %>
+            <%= attachment_image_tag(ranking, :post_image, :fill, 200, 200, fallback: "noimage.jpeg") %><br>
+            <%= ranking.user.name %><br>
+          <% end %>
+            いいね数：<%= ranking.favorites.count %>
+          <% end %>
+          <br>
+          <% end %>
+      </div>
   </div>
-  <div class="col-md-9">
+  <div class="col-md-8">
 
     <table class='table table-hover table-inverse'>
       <thead>
@@ -39,6 +68,7 @@
      <%= paginate @posts %>
   </div>
 </div>
+
 
 
 <script>

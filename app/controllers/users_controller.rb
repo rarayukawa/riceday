@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(3)
     @post = Post.new
     @following_users = current_user.following
     @follower_users = current_user.followers
@@ -21,9 +21,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if @user != current_user
-      redirect_to user_path(current_user)
-    end
   end
 
   def update
@@ -32,6 +29,13 @@ class UsersController < ApplicationController
       redirect_to user_path(@user.id), notice: "ユーザー情報更新しました！"
     else
       render "edit"
+    end
+  end
+
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to user_path(current_user)
     end
   end
 
