@@ -27,7 +27,7 @@ test:
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
 
-  production:
+production:
   <<: *default
   adapter: mysql2
   encoding: utf8
