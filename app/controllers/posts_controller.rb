@@ -18,7 +18,7 @@ class PostsController < ApplicationController
       params[:children_id],
       params[:grandchildren_id]
     )
-      redirect_to post_path(@post), notice: "投稿しました！"
+      redirect_to post_path(@post), notice: "投稿完了しました！"
     else
       @posts = Post.all
       @category_parent_array = Category.category_parent_array_create

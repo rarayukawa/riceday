@@ -1,3 +1,5 @@
+document.addEventListener("turbolinks:load"
+, function () {
 $(function() {
   function appendOption(category) {
     let html = `<option value='${category.id}' data-category='${category.id}'>${category.name}</option>`;
@@ -89,4 +91,5 @@ $(function() {
       $('#grandchildren-wrapper').remove();
     }
   });
+});
 });

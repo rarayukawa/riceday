@@ -7,29 +7,34 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #既製品
+readymade = Category.create(name: '既製品')
+readymade_children_array = ['市販', 'お取り寄せ']
+readymade_grandchildren_array = [
+  ['肉', '魚', '野菜', 'その他'], # 市販の子
+  ['肉', '魚', '野菜', 'その他']
+  ]
 
-#既製品子カテゴリー配列
-readymade_child_array = ['市販','お取り寄せ']
-#既製品孫カテゴリー配列
-readymade_grandchild_array = [['肉','魚','野菜'], ['肉','魚','野菜']]
-parent = Category.create(name: '既製品')
-readymade_child_array.each_with_index do |child, i|
- child = parent.children.create(name: child)
- readymade_grandchild_array[i].each do |grandchild|
-   child.children.create(name: grandchild)
- end
+readymade_children_array.each_with_index do |children, index|
+  children = readymade.children.create(name: children)
+ readymade_grandchildren_array[index].each do |grandchildren|
+    children.children.create(name: grandchildren)
+  end
 end
 
-#レシピ
 
-#レシピ子カテゴリー配列
-recipe_child_array = ['肉','野菜','魚','スープ','その他']
-#レシピ孫カテゴリー配列
-recipe_grandchild_array = [['~5分', '~10分', '~30分', '1時間~'], ['~5分', '~10分', '~30分', '1時間~'], ['~5分', '~10分', '~30分', '1時間~'], ['~5分', '~10分', '~30分', '1時間~'], ['~5分', '~10分', '~30分', '1時間~']]
-parent = Category.create(name: 'レシピ')
-recipe_child_array.each_with_index do |child, i|
- child = parent.children.create(name: child)
- recipe_grandchild_array[i].each do |grandchild|
-   child.children.create(name: grandchild)
- end
+#レシピ
+recipe = Category.create(name: 'レシピ')
+recipe_children_array = ['肉', '魚', '野菜', 'スープ', 'その他']
+recipe_grandchildren_array = [
+  ['~5分', '~10分', '~30分', '~1時間','それ以上'], 
+  ['~5分', '~10分', '~30分', '~1時間','それ以上'], 
+  ['~5分', '~10分', '~30分', '~1時間','それ以上'], 
+  ['~5分', '~10分', '~30分', '~1時間','それ以上'] 
+]
+
+recipe_children_array.each_with_index do |children, index|
+  children = recipe.children.create(name: children)
+  recipe_grandchildren_array[index].each do |grandchildren|
+    children.children.create(name: grandchildren)
+  end
 end

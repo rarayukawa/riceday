@@ -10,12 +10,12 @@
       <%= f.text_area :text, class:'form-control' %><br>
       <div class="category-form">
         <%= label_tag 'カテゴリー' %>
-        <%= select_tag 'parent_id', options_for_select(@category_parent_array), id: 'parent-category', class: 'form-control post-category' %>
+        <%= select_tag 'parent_id', options_for_select(@category_parent_array), id: 'parent-category', class: 'form-control' %>
         <i class="fas fa-chevron-down"></i>
       </div><br>
-      <%= collection_check_boxes(:post, :category_ids, Category.all, :id, :name) do |cb| %>
-        <%= cb.label { cb.check_box + ' ' + cb.text } %>
-      <% end %><br>
+      <%#= collection_check_boxes(:post, :category_ids, Category.all, :id, :name) do |cb| %>
+        <%#= cb.label { cb.check_box + ' ' + cb.text } %>
+      <%# end %><br>
       <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
     <% end %>
       <div class="rank">
@@ -48,7 +48,7 @@
           <% end %>
       </div>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-9">
 
     <table class='table table-hover table-inverse'>
       <thead>
