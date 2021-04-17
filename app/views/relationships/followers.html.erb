@@ -1,0 +1,25 @@
+<div class='col-md-10 col-lg-9'>
+      <h2>フォロワー一覧</h2>
+      <%= @user.followers.count %>人
+      <table class='table'>
+  <thead>
+    <tr>
+      <th>プロフィール画像</th>
+      <th>ユーザー名</th>
+      <th>紹介文</th>
+      <th colspan="6"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+
+        <td><%= attachment_image_tag(user, :profile_image, :fill, 150, 150, fallback: "noimage.jpeg") %></td>
+        <td><%= link_to user.name, user_path(user) %></td>
+        <td><%= user.introduction %></td>
+        <td><%= link_to 'ユーザー詳細', user_path(user), class: "user_#{user.id}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

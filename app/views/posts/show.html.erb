@@ -1,5 +1,4 @@
-<div class="row">
-  <div class="col-md-8">
+<div class='col-md-10 col-lg-9'>
     <h2>投稿記事</h2>
   <table class='table'>
     <tr><%= link_to @post do %>
@@ -29,6 +28,8 @@
           </div></td>
     </tr>
   </table>
+  <%= link_to '投稿情報編集',edit_post_path(@post),class: "btn btn-outline-secondary fas fa-user-cog edit_user_#{@post.id}" %><br>
+  <br>
     <ul>
         <li class="comment-create">
             <h3 class="text-left title">コメント</h3>
@@ -44,10 +45,4 @@
             <%= render partial: 'post_comments/form', locals: { post_comment: @post_comment, post: @post, newpost_comment: @newpost_comment } %>
         </div>
     <% end %>
-  </div>
-</div>
-<div class='row'>
-  <div class="col-md-4">
-  <%= link_to '投稿情報編集',edit_post_path(@post),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{@post.id}" %>
-  </div>
 </div>

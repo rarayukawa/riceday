@@ -8,4 +8,14 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:id])
     current_user.unfollow(@user)
   end
+
+  def following
+    @user = User.find(params[:user_id])
+    @users = @user.followings
+  end
+
+  def followers
+    @user = User.find(params[:user_id])
+    @users = @user.followers
+  end
 end

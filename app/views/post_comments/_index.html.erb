@@ -1,5 +1,5 @@
 <!--コメント２軒目まで-->
-<%= post_comments.count %>件コメント
+<%= post_comments.count %>件のコメント
 <h6 class="more" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">もっと見る....</h6>
 <% post_comments.first(2).each do |comment| %>
   <% unless comment.id.nil? %>
@@ -7,14 +7,12 @@
         <div class="comment-box">
             <div class="comment-avatar">
                 <%= attachment_image_tag comment.user, :profile_image, fallback: "noimage.jpeg", class:"comment-image", size: "40x40" %>
-            </div>
-            <div class="comment-text">
-                <p><%= link_to "@#{comment.user.name}", users_path(comment.user.id) %></p>
+                <%= link_to "@#{comment.user.name}", users_path(comment.user.id) %>
                 <div class="comment-entry">
                     <%= comment.comment %>
                     <% if comment.user == current_user %>
-                        <%= link_to post_post_comment_path(comment.post_id, comment.id), method: :delete, remote: true, class: "comment_destroy" do %>
-                            <i class="fas fa-trash" style="color: black;"></i>
+                        <%= link_to post_post_comment_path(comment.post_id, comment.id), method: :delete, remote: true, class: "comment_destroy pull-right" do %>
+                            <i class="fas fa-trash" style="color: black;">コメントを削除</i>
                         <% end %>
                     <% end %>
                 </div>
@@ -34,14 +32,12 @@
                     <div class="comment-box">
                         <div class="comment-avatar">
                             <%= attachment_image_tag comment.user, :profile_image, fallback: "noimage.jpeg", class:"comment-image", size: "40x40" %>
-                        </div>
-                        <div class="comment-text">
-                            <p><%= link_to "@#{comment.user.name}", users_path(comment.user.id) %></p>
+                                <%= link_to "@#{comment.user.name}", users_path(comment.user.id) %>
                             <div class="comment-entry">
                                 <%= comment.comment %>
                                 <% if comment.user == current_user %>
-                                    <%= link_to post_post_comment_path(comment.post_id, comment.id), method: :delete, remote: true, class: "comment_destroy" do %>
-                                        <i class="fas fa-trash" style="color: black;"></i>
+                                    <%= link_to post_post_comment_path(comment.post_id, comment.id), method: :delete, remote: true, class: "comment_destroy pull-right" do %>
+                                        <i class="fas fa-trash" style="color: black;">コメントを削除</i>
                                     <% end %>
                                 <% end %>
                             </div>

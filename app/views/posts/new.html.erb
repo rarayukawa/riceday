@@ -1,18 +1,23 @@
-<div class="row">
-  <div class="col-8">
-    <h2>新規投稿</h2>
-  <%= form_with model: @post, url:'/posts', remote: true do |f| %>
-  <div class="form_image">画像投稿</div>
-  <%= attachment_image_tag @post, :post_image, fallback: "noimage.jpeg", id: "img_prev", style: "height: 250px; width:300px;" %><br>
-  <%= f.attachment_field :post_image %>
-  <div class="form_title">タイトル</div>
-  <%= f.text_field :title %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-  <div class="form_text">内容</div>
-  <%= f.text_area :text %>
-  <%= f.submit '投稿' %>
-  <% end %>
-  </div>
+<div class="col-md-10 col-lg-8">
+  <h2>新規投稿</h2>
+  <%= form_with model: @post, remote: true do |f| %>
+    <%= f.label :post_image, '画像' %><br>
+    <%= attachment_image_tag @post, :post_image, fallback: "noimage.jpeg", id: "img_prev", style: "height: 200px; width:200px;" %><br>
+    <%= f.attachment_field :post_image, class: "form-control-file post_image" %><br>
+    <%= f.label :title, 'タイトル' %><br>
+    <%= f.text_field :title, class:'form-control' %><br>
+    <%= f.label :text, '本文' %><br>
+    <%= f.text_area :text, class:'form-control' %><br>
+    <div class="category-form">
+      <%= label_tag 'カテゴリー' %>
+      <%= select_tag 'parent_id', options_for_select(@category_parent_array), id: 'parent-category', class: 'form-control' %>
+      <i class="fas fa-chevron-down"></i>
+    </div><br>
+      <%#= collection_check_boxes(:post, :category_ids, Category.all, :id, :name) do |cb| %>
+        <%#= cb.label { cb.check_box + ' ' + cb.text } %>
+      <%# end %><br>
+    <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+    <% end %>
 </div>
 
 

@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @category_parent_array = Category.category_parent_array_create
   end
 
   def create

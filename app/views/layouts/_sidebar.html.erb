@@ -1,8 +1,7 @@
-<div class="row">
-  <div class="col-md-2 col-lg-4">
-    サイドバー<br>
-    <%= link_to "新規投稿", new_post_path %><br>
-    <%= link_to "カテゴリ一覧", categories_path %><br>
+<div class="col-md-2 col-lg-2">
+  <% if user_signed_in? %>
+    <%= link_to "新規投稿", new_post_path, class: 'nav-link text-dark' %><br>
+    <%= link_to "マイページ", user_path(current_user), class: 'nav-link text-dark' %><br>
     <nav class="navbar.navbar-default.navbar-fixed-top">
         <ul class="nav.navbar-nav.navbar-right">
           <li class="dropdown" role='presentation'>
@@ -26,5 +25,28 @@
           </li>
         </ul>
       </nav>
+      <table class='table'>
+        <tr><%= attachment_image_tag(current_user, :profile_image, :fill, 100, 100, fallback: "noimage.jpeg", size:'100x100') %></tr>
+        <tr>
+      	  <th>名前</th>
+      	  <th><%= current_user.name %></th>
+        </tr>
+        <tr>
+      	  <th>自己紹介</th>
+      	  <th><%= current_user.introduction %></th>
+      	</tr>
+      	<tr>
+      	  <th>フォロー</th>
+      	  <th><%= link_to following_user_path(current_user) do %>
+      	  <%= current_user.following.count %><% end %></th>
+      	 </tr>
+      	 <tr>
+      	  <th>フォロワー</th>
+      	  <th><%= link_to followers_user_path(current_user) do %>
+      	  <%= current_user.followers.count %><% end %></th>
+        </tr>
+      </table>
+
+        <%= link_to '',edit_user_path(current_user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{current_user.id}" %>
+  <% end %>
   </div>
-</div>

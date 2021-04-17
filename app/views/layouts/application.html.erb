@@ -15,9 +15,12 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="container">
+      <div class="row" style="padding-top:50px; margin-bottom:50px;">
        <p id="notice"><%= notice %></p>
       <%= render 'layouts/sidebar' %>
       <%= yield %>
+      </div>
     </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
