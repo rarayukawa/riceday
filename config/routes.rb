@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
-  get 'categories/index'
-  get 'categories/edit'
+  get 'search/search'
   devise_for :users
   root to: 'homes#top'
   get 'home/about' => 'homes#about'
   get 'get_category/children', to: 'posts#get_category_children', defaults: { format: 'json' }
   get 'get_category/grandchildren', to: 'posts#get_category_grandchildren', defaults: { format: 'json' }
-
-  get 'users/:user_id/follows' => 'relationships#follows', as: 'follows'
-  get 'users/:user_id/followers' => 'relationships#followers', as: 'followers'
+  get '/search' => 'search#search'
   post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
   delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
   get 'get_category/new', to: 'homes#category_window', defaults: { format: 'json' }

@@ -2,7 +2,17 @@
   <% if user_signed_in? %>
     <%= link_to "新規投稿", new_post_path, class: 'nav-link text-dark' %><br>
     <%= link_to "マイページ", user_path(current_user), class: 'nav-link text-dark' %><br>
+    <div class="search-form">
+      <p>検索<i class="fas fa-search"></i></p>
+      <%= form_with url:search_path, method: :get, local: true do |f| %>
+         <%= f.text_field 'search[content]' %>
+         <%= f.select 'search[model]', options_for_select({ "ユーザー" => "user", "投稿" => "post"}) %>
+         <%= f.select'search[how]', options_for_select({"部分一致" => "partical","完全一致" => "match", "前方一致" => "forward", "後方一致" => "backward" }) %>
+         <%= f.submit '検索する', class: "btn btn-outline-info" %>
+      <% end %>
+     </div>
     <nav class="navbar.navbar-default.navbar-fixed-top">
+      <div class="container-fluid">
         <ul class="nav.navbar-nav.navbar-right">
           <li class="dropdown" role='presentation'>
             <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'></a>
@@ -14,7 +24,7 @@
                 <ul class="dropdown-menu" role='menu'>
                   <li role='presentation'>
                 　<% Category.where(ancestry: nil).each do |parent| %>
-                  <%= link_to parent.name, root_path, id: "#{parent.id}", class: 'parent-category' %>
+                  <%= link_to parent.name, posts_path, id: "#{parent.id}", class: 'parent-category' %>
                   <% end %>
                   </li><br>
                   <li role='presentation' class='children-list'></li>
@@ -24,6 +34,7 @@
               </span>
           </li>
         </ul>
+        </div>
       </nav>
       <table class='table'>
         <tr><%= attachment_image_tag(current_user, :profile_image, :fill, 100, 100, fallback: "noimage.jpeg", size:'100x100') %></tr>
