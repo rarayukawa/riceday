@@ -75,3 +75,4 @@ group :production do
   gem 'mysql2'
 end
 gem 'byebug'
+gem 'pry-rails'

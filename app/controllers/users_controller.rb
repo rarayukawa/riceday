@@ -7,15 +7,15 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @users = User.all
+    @users = User.order(created_at: :desc).page(params[:page]).per(5)
     @post = Post.new
   end
 
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(3)
-    #@post = Post.new
-    @post = Post.find(params[:id])
+    @post = Post.new
+    #@post = Post.find(params[:id])
     @following_users = current_user.following
     @follower_users = current_user.followers
     @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
@@ -44,9 +44,10 @@ class UsersController < ApplicationController
 
   def following
     # @userがフォローしているユーザー
-    @user = User.find(params[:user_id])
-    @users = @user.followings
+    @user = User.find_by!(params[:user_id])
+    @users = @user.following
   end
+
 
   def followers
     # @userをフォローしているユーザー

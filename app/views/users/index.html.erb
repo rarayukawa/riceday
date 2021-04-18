@@ -12,7 +12,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= attachment_image_tag(user, :profile_image, :fill, 150, 150, fallback: "noimage.jpeg") %></td>
+        <td><%= attachment_image_tag(user, :profile_image, :fill, 150, 150, fallback: "noimage.jpeg", size:'100x100') %></td>
         <td><%= user.name %></td>
         <td><div class="follower">
           <%= link_to followers_user_path(user.id) do %>
