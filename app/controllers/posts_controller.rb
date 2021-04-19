@@ -23,6 +23,7 @@ class PostsController < ApplicationController
     else
       @posts = Post.all
       @category_parent_array = Category.category_parent_array_create
+      flash.now[:alert] = "入力に誤りがあります"
       render 'index'
     end
   end
@@ -74,7 +75,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    redirect_to posts_path, alert: "投稿を削除しました"
   end
 
   def get_category_children

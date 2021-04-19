@@ -76,3 +76,4 @@ group :production do
 end
 gem 'byebug'
 gem 'pry-rails'
+gem 'devise-i18n'

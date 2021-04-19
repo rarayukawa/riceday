@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @users = User.order(created_at: :desc).page(params[:page]).per(5)
+    @users = User.order(created_at: :desc).page(params[:page]).per(6)
     @post = Post.new
   end
 
@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: "ユーザー情報更新しました！"
     else
+      flash.now[:alert] = "入力に誤りがあります"
       render "edit"
     end
   end
