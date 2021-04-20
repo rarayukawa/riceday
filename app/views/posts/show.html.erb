@@ -1,5 +1,5 @@
 <div class='col-md-10 col-lg-9'>
-    <h2>投稿記事</h2>
+    <h2>投稿記事<%= image_tag 'h2.png', :size =>'40x40' %></h2>
   <table class='table'>
     <tr><%= link_to @post do %>
         <%= attachment_image_tag(@post, :post_image, :fill, 220, 220, fallback: "noimage.jpeg") %>
@@ -10,7 +10,7 @@
     </tr>
     <tr>
       <th>本文</th>
-      <th><%= @post.text %></th>
+      <th><%= simple_format(@post.text) %></th>
     </tr>
     <tr>
       <th>投稿日時</th>
@@ -32,7 +32,7 @@
   <br>
     <ul>
         <li class="comment-create">
-            <h3 class="text-left title">コメント</h3>
+          <h3 class="text-left title">コメント<%= image_tag 'h2.png', :size =>'40x40' %></h3>
         </li>
         <li id="comments_area">
             <%= render partial: 'post_comments/index', locals: { post_comments: @post_comments } %>

@@ -1,28 +1,24 @@
-<div class='col-md-3 col-lg-3'>
-    <%= form_with model: @category, local: true do |f| %>
-      <%= f.label :name, 'カテゴリー名' %><br>
-      <%= f.text_field :name, class:'form-control' %><br>
-      <%= f.submit '追加', class: 'btn btn-success btn-block' %>
-    <% end %>
-  </div>
-  <div class='col-md-6 col-lg-6'>
-    <table class='table table-hover table-inverse'>
-      <thead>
-        <tr>
-          <th></th>
-          <th>カテゴリー名</th>
-          <th></th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @categories.each do |category| %>
-          <tr>
-            <td><%= category.name %></td>
-            <td><%= link_to '編集', edit_category_path(category), class: 'btn-sm btn-primary' %></td>
-            <td><%= link_to '削除', category_path(category), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn-sm btn-danger' %></td>
-          </tr>
+<div class='col-md-8 col-lg-8'>
+  <h2>カテゴリー一覧<%= image_tag 'h2.png', :size =>'40x40' %></h2>
+  <ul class="categories">
+    <% @parents.each do |parent| %>
+    <li class="parents">
+      <%= link_to "#{parent.name}", category_path(parent), class: 'text-dark' %>
+      <ul class="categories_children">
+        <% parent.children.each do |child| %>
+        <li class="children">
+          <%= link_to "#{child.name}", category_path(child), class: 'text-dark' %>
+          <ul class="categories_grandchildren">
+            <% child.children.each do |grandchild| %>
+            <li class="grandchildren">
+              <%= link_to "#{grandchild.name}", category_path(grandchild), class: 'text-dark' %>
+              <% end %>
+            </li>
+          </ul>
         <% end %>
-      </tbody>
-    </table>
+        </li>
+      </ul>
+    <% end %>
+    </li>
+  </ul>
 </div>

@@ -1,6 +1,6 @@
 <div class='col-md-10 col-lg-9'>
   <% if @model == "user" %>
-    <h2>ユーザー検索 "<%= @content %>"</h2>
+    <h2>ユーザー検索 "<%= @content %>"<%= image_tag 'h2.png', :size =>'40x40' %></h2>
       <table class='table'>
         <thead>
           <tr>
@@ -53,7 +53,7 @@
                 <%= post.user.name %>
                 <% end %></td>
             <td><%= link_to post.title, post_path(post), class: "post_#{post.id}" %></td>
-            <td><%= post.text %></td>
+            <td><%= truncate(post.text, length:10) %></td>
             <td><% post.categories.each do |category| %>
                 <%= category.name %>/
                 <% end %></td>

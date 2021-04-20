@@ -11,31 +11,7 @@
          <%= f.submit '検索する', class: "btn btn-outline-info" %>
       <% end %>
      </div>
-    <nav class="navbar.navbar-default.navbar-fixed-top">
-      <div class="container-fluid">
-        <ul class="nav.navbar-nav.navbar-right">
-          <li class="dropdown" role='presentation'>
-            <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'></a>
-              <i class="fas.fa-list-ul"></i>
-              <span>
-                カテゴリーから探す
-              </span>
-              <span class="caret">
-                <ul class="dropdown-menu" role='menu'>
-                  <li role='presentation'>
-                　<% Category.where(ancestry: nil).each do |parent| %>
-                  <%= link_to parent.name, posts_path, id: "#{parent.id}", class: 'parent-category' %>
-                  <% end %>
-                  </li><br>
-                  <li role='presentation' class='children-list'></li>
-                  <br>
-                  <li role='presentation' class='grandchildren-list'></li>
-                </ul>
-              </span>
-          </li>
-        </ul>
-        </div>
-      </nav>
+　　<br><br>
       <table class='table'>
         <tr><%= attachment_image_tag(current_user, :profile_image, :fill, 100, 100, fallback: "noimage.jpeg", size:'100x100') %></tr>
         <tr>

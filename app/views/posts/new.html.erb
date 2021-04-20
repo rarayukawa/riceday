@@ -1,5 +1,5 @@
 <div class="col-md-10 col-lg-8">
-  <h2>新規投稿</h2>
+  <h2>新規投稿<%= image_tag 'h2.png', :size =>'40x40' %></h2>
   <%= form_with model: @post, remote: true do |f| %>
     <%= f.label :post_image, '画像' %><br>
     <%= attachment_image_tag @post, :post_image, fallback: "noimage.jpeg", id: "img_prev", style: "height: 200px; width:200px;" %><br>
@@ -7,7 +7,7 @@
     <%= f.label :title, 'タイトル' %><br>
     <%= f.text_field :title, class:'form-control' %><br>
     <%= f.label :text, '本文' %><br>
-    <%= f.text_area :text, class:'form-control' %><br>
+    <%= f.text_area :text, class:'form-control', :size=>"100x50" %><br>
     <div class="category-form">
       <%= label_tag 'カテゴリー' %>
       <%= select_tag 'parent_id', options_for_select(@category_parent_array), id: 'parent-category', class: 'form-control' %>
