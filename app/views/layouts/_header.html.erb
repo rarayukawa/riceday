@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
-            <li class="nav-item"><%= link_to "投稿一覧", posts_path, class: 'nav-link text-dark' %></li>
-            <li class="nav-item"><%= link_to "ユーザー一覧", users_path, class: 'nav-link text-dark' %></l>
-            <li class="nav-item"><%= link_to "カテゴリー一覧", categories_path, class: 'nav-link text-dark' %></li>
-            <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %></li>
+            <li class="nav-item"><%= link_to posts_path, class: 'nav-link text-dark' do %>投稿一覧<%= image_tag 'eb.jpg', :size =>'20x20' %><% end %></li>
+            <li class="nav-item"><%= link_to users_path, class: 'nav-link text-dark' do %>ユーザー一覧<%= image_tag 'bro.jpg', :size =>'20x20' %><% end %></l>
+            <li class="nav-item"><%= link_to categories_path, class: 'nav-link text-dark' do %>カテゴリー一覧<%= image_tag 'chikin2.jpg', :size =>'20x20' %><% end %></li>
+            <li class="nav-item"><%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>ログアウト<%= image_tag 'eggg.jpg', :size =>'20x20' %><% end %></li>
           <% else %>
             <li><%= link_to "ABOUT", home_about_path, class: 'nav-link text-dark' %></li>
             <li><%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %></li>
