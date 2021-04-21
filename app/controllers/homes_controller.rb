@@ -1,5 +1,7 @@
 class HomesController < ApplicationController
   def top
+    @posts = Post.where(user_id: [*current_user.following_ids])
+    @posts = @posts.order(created_at: :desc).page(params[:page]).per(4)
   end
 
   def about

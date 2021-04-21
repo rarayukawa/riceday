@@ -54,7 +54,13 @@ class UsersController < ApplicationController
     @users = @user.followers
   end
 
+  def favorite
+    @user = User.find(params[:id])
+    @posts = @user.posts
 
+    favorites = Favorite.where(user_id: current_user.id).pluck(:post_id)  # ログイン中のユーザーのお気に入りのpost_idカラムを取得
+    @favorite_list = Kaminari.paginate_array(Post.find(favorites)).page(params[:page]).per(6)
+  end
 
   private
   def user_params

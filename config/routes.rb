@@ -9,11 +9,13 @@ Rails.application.routes.draw do
   post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
   delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
   get 'get_category/new', to: 'homes#category_window', defaults: { format: 'json' }
+  get 'user/:id/favorite' => 'users#favorite', as: 'user_favorite'
 
   resources :users do
     member do
       get :following, :followers
     end
+    get :favorites, on: :collection
   end
   resources :relationships, only: [:create, :destroy]
 

@@ -1,4 +1,45 @@
 <div class="col-lg-10">
-    <%= image_tag 'kome.jpg', :size =>'800x500' %>
+    <%= image_tag 'top2.jpg', :size =>'900x300' %><br><br>
+
+
+
+  <h2>フォローユーザーの新着投稿<%= image_tag 'h2.png', :size =>'40x40' %></h2>
+  <table class='table table-hover table-inverse'>
+      <thead>
+        <tr>
+          <th>画像</th>
+          <th>投稿者</th>
+          <th>タイトル</th>
+          <th>本文</th>
+          <th>カテゴリー</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+        <tr>
+          <td><%= link_to post do %>
+              <%= attachment_image_tag(post, :post_image, :fill, 190, 190, fallback: "noimage.jpeg") %>
+              <% end %></td>
+          <td><%= link_to post.user do %>
+              <%= attachment_image_tag(post.user, :profile_image, fallback: "noimage.jpeg", class:"profile-img-circle", size: "30x30") %><br>
+              <%= post.user.name %>
+              <% end %></td>
+          <td><%= link_to post.title, post_path(post), class: "post_#{post.id}" %></td>
+          <td><%= truncate(post.text, length:10) %></td>
+          <td><% post.categories.each do |category| %>
+              <%= category.name %>/
+              <% end %></td>
+          <td><div id="index_favorite_<%= post.id %>">
+                <%= render 'favorites/favorite', post: post %>
+              </div></td>
+          <td><% if post.user == current_user %>
+              <%= link_to '削除', post, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, remote: true, class: 'btn-sm btn-danger' %>
+              <% end %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+     <%= paginate @posts %>
 </div>
 
