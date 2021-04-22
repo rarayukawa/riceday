@@ -1,40 +1,42 @@
 <div class="col-md-2 col-lg-2">
-  <% if user_signed_in? %>
-    <%= link_to new_post_path, class: 'nav-link text-dark' do %>新規投稿<%= image_tag 'sake.jpg', :size =>'20x20' %><% end %><br>
-    <%= link_to user_path(current_user), class: 'nav-link text-dark' do %>マイページ<%= image_tag 'イラスト.jpg', :size =>'15x15' %><% end %><br>
-    <%= link_to user_favorite_path(current_user), class: 'nav-link text-dark' do %>いいねした記事<%= image_tag 'ume.png', :size =>'20x20' %><% end %><br>
-    <div class="search-form">
-      <p>検索<i class="fas fa-search"></i></p>
-      <%= form_with url:search_path, method: :get, local: true do |f| %>
-         <%= f.text_field 'search[content]' %>
-         <%= f.select 'search[model]', options_for_select({ "ユーザー" => "user", "投稿" => "post"}) %>
-         <%= f.select'search[how]', options_for_select({"部分一致" => "partical","完全一致" => "match", "前方一致" => "forward", "後方一致" => "backward" }) %>
-         <%= f.submit '検索する', class: "btn btn-outline-info" %>
-      <% end %>
-     </div>
-　　<br><br>
-      <table class='table'>
-        <tr><%= attachment_image_tag(current_user, :profile_image, :fill, 100, 100, fallback: "noimage.jpeg", size:'100x100') %></tr>
-        <tr>
-      	  <th>名前</th>
-      	  <th><%= current_user.name %></th>
-        </tr>
-        <tr>
-      	  <th>自己紹介</th>
-      	  <th><%= current_user.introduction %></th>
-      	</tr>
-      	<tr>
-      	  <th>フォロー</th>
-      	  <th><%= link_to following_user_path(current_user) do %>
-      	  <%= current_user.following.count %><% end %></th>
-      	 </tr>
-      	 <tr>
-      	  <th>フォロワー</th>
-      	  <th><%= link_to followers_user_path(current_user) do %>
-      	  <%= current_user.followers.count %><% end %></th>
-        </tr>
-      </table>
-
-        <%= link_to '',edit_user_path(current_user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{current_user.id}" %>
-  <% end %>
+  <div class="sidebar">
+    <% if user_signed_in? %>
+      <%= link_to new_post_path, class: 'nav-link text-dark' do %>新規投稿<%= image_tag 'sake.jpg', :size =>'20x20' %><% end %><br>
+      <%= link_to user_path(current_user), class: 'nav-link text-dark' do %>マイページ<%= image_tag 'イラスト.jpg', :size =>'15x15' %><% end %><br>
+      <%= link_to user_favorite_path(current_user), class: 'nav-link text-dark' do %>いいねした記事<%= image_tag 'ume.png', :size =>'20x20' %><% end %><br>
+      <div class="search-form">
+        <p>検索<i class="fas fa-search"></i></p>
+        <%= form_with url:search_path, method: :get, local: true do |f| %>
+           <%= f.text_field 'search[content]' %>
+           <%= f.select 'search[model]', options_for_select({ "ユーザー" => "user", "投稿" => "post"}) %>
+           <%= f.select'search[how]', options_for_select({"部分一致" => "partical","完全一致" => "match", "前方一致" => "forward", "後方一致" => "backward" }) %>
+           <%= f.submit '検索する', class: "btn btn-outline-info" %>
+        <% end %>
+       </div>
+  　　<br><br>
+        <table class='table'>
+          <tr><%= attachment_image_tag(current_user, :profile_image, :fill, 100, 100, fallback: "noimage.jpeg", size:'100x100') %></tr>
+          <tr>
+        	  <th>名前</th>
+        	  <th><%= current_user.name %></th>
+          </tr>
+          <tr>
+        	  <th>自己紹介</th>
+        	  <th><%= current_user.introduction %></th>
+        	</tr>
+        	<tr>
+        	  <th>フォロー</th>
+        	  <th><%= link_to following_user_path(current_user) do %>
+        	  <%= current_user.following.count %><% end %></th>
+        	 </tr>
+        	 <tr>
+        	  <th>フォロワー</th>
+        	  <th><%= link_to followers_user_path(current_user) do %>
+        	  <%= current_user.followers.count %><% end %></th>
+          </tr>
+        </table>
+  
+          <%= link_to '',edit_user_path(current_user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{current_user.id}" %>
+    <% end %>
   </div>
+</div>

@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     @posts = Post.order(created_at: :desc).page(params[:page]).per(5)
     @post = Post.new
     @category_parent_array = Category.category_parent_array_create
-    @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+    @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
   end
 
   def edit
