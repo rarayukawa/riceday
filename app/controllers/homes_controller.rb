@@ -1,5 +1,6 @@
 class HomesController < ApplicationController
  #before_action :authenticate_user!
+
   def top
     @posts = Post.where(user_id: [*current_user.following_ids])
     @posts = @posts.order(created_at: :desc).page(params[:page]).per(4)
