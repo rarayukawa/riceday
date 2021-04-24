@@ -39,7 +39,7 @@
             <% lastFavorite = ranking.favorites.count %>
           <% else %>
             <% lastFavorite = ranking.favorites.count %>
-            <i class="fas fa-crown"></i>第<%= j %>位<br>
+            第<%= j %>位<br>
             <%= link_to ranking.user do %>
             <%= attachment_image_tag(ranking, :post_image, :fill, 200, 200, fallback: "noimage.jpeg") %><br>
             <%= ranking.user.name %><br>
