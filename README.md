@@ -33,6 +33,6 @@ https://docs.google.com/spreadsheets/d/1lGwdW988mwKikb-Z3pJxKDU75b410udLzrnD_yyH
 - IDE：Cloud9
 
 ## 使用素材
-- フリー素材.com(https://free-materials.com/)（予定）
-- いらすとや(https://www.irasutoya.com/)（予定）
-- パクたそ(https://www.pakutaso.com/)（予定）
+- フリー素材.com(https://free-materials.com/)(テスト投稿画像）
+- いらすとや(https://www.irasutoya.com/)
+- パクたそ(https://www.pakutaso.com/)（テスト投稿画像）
