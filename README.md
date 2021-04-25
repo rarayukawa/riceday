@@ -1,5 +1,5 @@
 # ごはんの日。
-<img src="https://user-images.githubusercontent.com/77393219/115980949-65cfe680-a5cb-11eb-933f-bf89cfc579a4.jpg" width="300px">
+<img src="https://user-images.githubusercontent.com/77393219/115980949-65cfe680-a5cb-11eb-933f-bf89cfc579a4.jpg" width="600px">
 
 ## サイト概要
 <img src="https://user-images.githubusercontent.com/77393219/115980916-3d47ec80-a5cb-11eb-89cd-74d4f01622d0.jpg" width="200px">
