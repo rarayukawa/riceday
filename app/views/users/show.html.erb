@@ -55,7 +55,7 @@
               <% if myranking.favorites.count != lastFavorite %>
                 <% j = i %>
                 第<%= j %>位<br>
-                <%= link_to myranking.user do %>
+                <%= link_to myranking do %>
                 <%= attachment_image_tag(myranking, :post_image, :fill, 80, 80, fallback: "noimage.jpeg") %><br>
               <% end %>
                 いいね数：<%= myranking.favorites.count %>
@@ -63,7 +63,7 @@
               <% else %>
                 <% lastFavorite = myranking.favorites.count %>
                 第<%= j %>位<br>
-                <%= link_to myranking.user do %>
+                <%= link_to myranking do %>
                 <%= attachment_image_tag(myranking, :post_image, :fill, 80, 80, fallback: "noimage.jpeg") %><br>
               <% end %>
                 いいね数：<%= myranking.favorites.count %>
